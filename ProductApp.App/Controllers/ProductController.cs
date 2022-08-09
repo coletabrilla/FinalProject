@@ -1,35 +1,55 @@
-﻿using FinalProject.DataModel;
+﻿using AutoMapper;
+using FinalProject.DataModel;
 using Microsoft.AspNetCore.Mvc;
+using ProductApp.App.Models;
 
 namespace POSystem.App.Controllers
 {
     public class ProductController : Controller
     {
         private readonly AppDbContext context;
-        public ProductController(AppDbContext context)
+        private readonly IMapper mapper;
+        public ProductController(AppDbContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
         public IActionResult Index()
         {
-            return View(context.Products.OrderBy(o => o.Stock).ToList());
+            List<ProductVM> list = mapper.Map<List<ProductVM>>(context.Products.OrderBy(o => o.Stock).ToList());
+            return View(list);
+            //return View(context.Products.OrderBy(o => o.Stock).ToList());
         }
 
         public IActionResult Add()
         {
-            return View(new Product());
+           // ProductVM model = new ProductVM();
+            return View(new ProductVM());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Add(Product model)
+        public async Task<IActionResult> Add(ProductVM model)
         {
-            //codes to add new supplier
-            await context.AddAsync(model);
-            //context.Set<Supplier>().Add(model); //this works too
-            await context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid == true) //okay na shaaaa
+            {
+                //codes to add new supplier
+                await context.AddAsync(mapper.Map<Product>(model));
+                //context.Set<Supplier>().Add(model); //this works too
+                await context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+
+
+            }
+            else
+            {
+                return View(model);
+            }
+
+            
+            
 
         }
 
@@ -48,20 +68,31 @@ namespace POSystem.App.Controllers
         public async Task <IActionResult> Edit(int? id)
         {
             if (id == null) return RedirectToAction("Index");
-            var product = await context.Products.FindAsync(id);
+            ProductVM product = mapper.Map<ProductVM>(await context.Products.FindAsync(id));
+
             return View(product);
         }
-
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task <IActionResult> Edit(Product model)
+        public async Task <IActionResult> Edit(ProductVM model)
         {
-            //update operation
-            context.Set<Product>().Update(model);
-            //context.Update(model); //this works too
-            await context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                //update operation
+                context.Set<Product>().Update(mapper.Map<Product>(model));
+                //context.Update(model); //this works too
+                await context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(model);
+            }
+
+
+            
         }
     }
     

@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model ProductVM
 
 <h3>Add a Stock</h3>
 
@@ -6,23 +6,28 @@
 <form asp-controller="Product" asp-action="Add" method="post">
     <label asp-for="Stock"></label>
     <input type="text" asp-for="Stock" class="form-control" />
-    <br />
+    <span asp-validation-for="Stock" class="text-danger"></span>
+    <br /><br />
 
     <label asp-for="Type"></label>
     <input type="text" asp-for="Type" class="form-control" />
-    <br />
+    <span asp-validation-for="Type" class="text-danger"></span>
+    <br /><br />
 
     <label asp-for="Price"></label>
     <input type="text" asp-for="Price" class="form-control" />
-    <br />
+    <span asp-validation-for="Price" class="text-danger"></span>
+    <br /><br />
 
     <label asp-for="Qty"></label>
     <input type="text" asp-for="Qty" class="form-control" />
-    <br />
+    <span asp-validation-for="Qty" class="text-danger"></span>
+    <br /><br />
 
     <label asp-for="Supplier"></label>
     <input type="text" asp-for="Supplier" class="form-control" />
-    <br />
+    <span asp-validation-for="Supplier" class="text-danger"></span>
+    <br /><br />
 
     
 

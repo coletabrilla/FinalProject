@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model ProductVM
 
 <h3>Edit Product</h3>
 
@@ -7,24 +7,29 @@
 
     <label asp-for="Stock"></label>
     <input type="text" asp-for="Stock" class="form-control" />
-    <br />
+    <span asp-validation-for="Stock" class="text-danger"></span>
+    <br /><br />
 
    
     <label asp-for="Type"></label>
     <input type="text" asp-for="Type" class="form-control" />
-    <br />
+    <span asp-validation-for="Type" class="text-danger"></span>
+    <br /><br />
 
     <label asp-for="Price"></label>
     <input type="text" asp-for="Price" class="form-control" />
-    <br />
+   <span asp-validation-for="Price" class="text-danger"></span>
+    <br /> <br />
 
     <label asp-for="Qty"></label>
     <input type="text" asp-for="Qty" class="form-control" />
-    <br />
+    <span asp-validation-for="Qty" class="text-danger"></span>
+    <br /><br />
 
     <label asp-for="Supplier"></label>
     <input type="text" asp-for="Supplier" class="form-control" />
-    <br />
+    <span asp-validation-for="Supplier" class="text-danger"></span>
+    <br /><br />
 
    @* <label type="hidden" asp-for="DateStocked"></label>*@
     <input type="hidden" asp-for="DateStocked" value="@DateTime.Now" />
@@ -34,7 +39,7 @@
     <input type="hidden" asp-for="DateModified" value="DateTime.Now" />
     <br />
     <br /><br />*@
-    <a asp-controller="Supplier" asp-action="Index" class="btn btn-primary">
+    <a asp-controller="Product" asp-action="Index" class="btn btn-primary">
         Back
     </a>
     <input type="submit" class="btn btn-success" value="Save Changes" />

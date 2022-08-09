@@ -1,5 +1,6 @@
 using FinalProject.DataModel;
 using Microsoft.EntityFrameworkCore;
+using ProductApp.App.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,9 @@ builder.Services.AddDbContext<AppDbContext>(opts =>
 {
     opts.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
+
+builder.Services.AddAutoMapper(typeof(MapperConfig));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
