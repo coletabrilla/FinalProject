@@ -1,0 +1,49 @@
+﻿@model Product
+
+<h3>Edit Product</h3>
+
+<form asp-controller="Product" asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ID" />
+
+    <label asp-for="Stock"></label>
+    <input type="text" asp-for="Stock" class="form-control" />
+    <br />
+
+   
+    <label asp-for="Type"></label>
+    <input type="text" asp-for="Type" class="form-control" />
+    <br />
+
+    <label asp-for="Price"></label>
+    <input type="text" asp-for="Price" class="form-control" />
+    <br />
+
+    <label asp-for="Qty"></label>
+    <input type="text" asp-for="Qty" class="form-control" />
+    <br />
+
+    <label asp-for="Supplier"></label>
+    <input type="text" asp-for="Supplier" class="form-control" />
+    <br />
+
+   @* <label type="hidden" asp-for="DateStocked"></label>*@
+    <input type="hidden" asp-for="DateStocked" value="@DateTime.Now" />
+    <br />
+    <br /><br />
+    @*<label asp-for="DateModified"></label>
+    <input type="hidden" asp-for="DateModified" value="DateTime.Now" />
+    <br />
+    <br /><br />*@
+    <a asp-controller="Supplier" asp-action="Index" class="btn btn-primary">
+        Back
+    </a>
+    <input type="submit" class="btn btn-success" value="Save Changes" />
+</form>
+
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
